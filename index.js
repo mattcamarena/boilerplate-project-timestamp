@@ -32,7 +32,7 @@ function isNumeric(n) {
 //Mysolution
 app.get("/api/:date?", (req,res) =>{
 
-  var inputdate = new Date(req.params.date);
+  var val = new Date(req.params.date);
 
   var input = new Date(val);
   var aunix; 
@@ -47,7 +47,7 @@ app.get("/api/:date?", (req,res) =>{
     res.JSON({unix: aunix, utc: autc})
   }else if(isNumeric(val)){  // unix given
     aunix = val;
-    autc = new Date(aunix).toUTCString();
+    autc = new Date(aunix*1000).toUTCString();
     res.JSON({unix: aunix, utc: autc})
   }
   else{  //trash input
