@@ -47,7 +47,7 @@ app.get("/api/:date?", (req,res) =>{
     res.JSON({unix: aunix, utc: autc})
   }else if(isNumeric(val)){  // unix given
     aunix = val;
-    autc = new Date(aunix*1000).toUTCString();
+    autc = new Date(aunix*1).toUTCString();
     res.JSON({unix: aunix, utc: autc})
   }
   else{  //trash input
