@@ -24,6 +24,37 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+// function to check if input is numeric
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+//Mysolution
+app.get("/api/:date?", (req,res) =>{
+
+  var inputdate = new Date(req.params.date);
+
+  var input = new Date(val);
+  var aunix; 
+  var autc;
+  if(val == undefined){ // empty input do now
+    aunix = Date.now();
+    autc = new Date(aunix).toUTCString();
+    res.JSON({unix: aunix, utc: autc})
+  }else if(!isNaN(input)){  // utc given
+    autc = new Date(input).toUTCString();
+    aunix = Date.parse(input);
+    res.JSON({unix: aunix, utc: autc})
+  }else if(isNumeric(val)){  // unix given
+    aunix = val;
+    autc = new Date(aunix).toUTCString();
+    res.JSON({unix: aunix, utc: autc})
+  }
+  else{  //trash input
+    res.JSON({error: "Invalid Date"})
+  }
+});
+
 
 
 // Listen on port set in environment variable or default to 3000
